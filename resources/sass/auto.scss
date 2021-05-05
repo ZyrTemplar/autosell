@@ -1,0 +1,77 @@
+.car_label{
+    font-size: 48px;
+    font-weight: bold;
+}
+.price-label{
+    font-size: 48px;
+    color: #dc3545;
+    font-weight: bold;
+    padding-left: 2rem;
+}
+
+.btn-buy {
+    margin: 0 auto;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 20px;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 36px;
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    outline: none;
+    max-width: 300px;
+}
+
+.btn-buy{
+    text-decoration: none;
+}
+
+.btn-more{
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+}
+
+.carousel-item.auto img{
+    width: 900px;
+    height: 700px;
+    object-fit: cover;
+    border: 6px solid black;
+    border-radius: 10px;
+}
+
+.carousel-control-next.no_bg{
+    background-color: transparent;
+    width: 50%;
+    opacity: 0;
+    height: 100%;
+}
+.carousel-control-next.no_bg:hover{
+    background-color: transparent;
+    width: 50%;
+    height: 100%;
+    opacity: 1;
+}
+
+.carousel-control-prev.no_bg:hover{
+    background-color: transparent;
+    width: 50%;
+    height: 100%;
+    opacity: 1;
+}
+
+.carousel-control-prev.no_bg{
+    background-color: transparent;
+    width: 50%;
+    height: 100%;
+    opacity: 0;
+}
+
+.min_params{
+    background-color: #95999c;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.close:hover {background: #e6e6ff;}

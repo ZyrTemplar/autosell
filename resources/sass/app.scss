@@ -1,0 +1,232 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cuprum:ital,wght@0,400;1,500;1,700&display=swap');
+@import "auto";
+
+// Общие стили
+*{
+    font-family: 'Cuprum', sans-serif;
+}
+
+.slogan{
+    font-family: 'Russo One', sans-serif;
+    font-size: 40px;
+}
+
+//Стили для формы поиска
+
+form.mini{
+    color: #FFFFFF;
+    background-color: #4a5568;
+    border-radius: 1rem;
+    padding-bottom: 15px;
+}
+
+p.btn-success{
+    margin-top: 63px;
+    margin-bottom: auto;
+    max-height: 40px;
+    min-width: 340px;
+}
+p.btn-danger{
+    margin-top: 8px;
+    margin-bottom: auto;
+    max-height: 40px;
+    min-width: 340px;
+}
+
+.form-select {
+    display: inline-block;
+    width: 100%;
+    padding: .375rem 2.25rem .375rem .75rem;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-content: center;
+}
+
+.item-column {
+    display: table-cell;
+    vertical-align: top;
+}
+
+
+.form-select.year{
+    width: 120px;
+    padding-right: 1.0rem;
+}
+
+hr.line{
+    width: 1140px;
+}
+
+.form-select.price-mini{
+    width: 120px;
+}
+
+//Стили для placeholder
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #212529;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #212529;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #212529;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #212529;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+.form-select.tex_ogl{
+    max-width: 70px;
+    padding-right: 18px;
+}
+
+.form-select.price-mini.placeholder{
+    color: #212529;
+}
+
+.form-label {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    font-size: 28px;
+}
+
+.options{
+    max-width: 40vw;
+    padding-bottom: 40%;
+    padding-top: 40%;
+}
+
+//Стили для вас может заинтересовать
+
+.card-title{
+}
+
+.btn{
+    font-family: 'Comfortaa', cursive;
+}
+.carousel-control-prev{
+    background-color: black;
+    width: 30px;
+    height: 30px;
+}
+.carousel-control-next{
+    background-color: black;
+    width: 30px;
+    height: 30px;
+}
+
+.carousel-item img  {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title{
+    font-size: 18px;
+}
+
+.carYear{
+    color: #E40C25;
+    line-height: 1.4;
+    font-weight: bold;
+    text-align: right;
+    display: block;
+    top: 0;
+    right: 0;
+}
+.icon-uah-grey {
+    margin-right: 8px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.section-title {
+    line-height: normal;
+    font-family: 'Cuprum', sans-serif;
+    font-weight: lighter;
+    font-size: 35px;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 50px;
+    color: rgba(0, 0, 0, 0.93);
+    text-transform: uppercase;
+}
+.button-block {
+    width: 100%;
+    padding-top: 30px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.price {
+    display: block;
+    font-size: 18px;
+    color: #404040;
+    font-weight: bold;
+    min-height: 27px;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+
+.button-block a {
+    margin: 0 auto;
+    display: block;
+    cursor: pointer;
+    padding: 10px 30px 10px;
+    border-radius: 2px;
+    transition: .3s ease;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    outline: none;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 18px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    max-width: 220px;
+    min-width: 213px;
+    min-height: 40px;
+    text-align: center;
+    color: #000;
+    text-decoration: none;
+}
+
+
+
+//Стили для иконок
+
+.param_icons{
+    padding-right: 4px;
+}
+
+//Стили для кнопки "подробнее" в карточке
+
+.btn.btn-primary {
+    background: #E40C25;
+    border-color: #E40C25;
+    color: #FFFFFF;
+    font-family: "Comfortaa", cursive;
+    margin-top: 8px;
+}
