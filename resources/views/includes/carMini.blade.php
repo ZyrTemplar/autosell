@@ -6,7 +6,8 @@
                     <div class="carousel-item active">
                         <img src="{{$img_arr[0]}}" title="Volkswagen Polo" alt="Volkswagen Polo" class="d-block w-100" style="visibility: visible;">
                     </div>
-                    <div class="carousel-item"><img src="{{$img_arr[1]}}" title="Volkswagen Polo" alt="Volkswagen Polo" class="d-block w-100" style="visibility: visible;">
+                    <div class="carousel-item">
+                        <img src="{{$img_arr[1]}}" title="Volkswagen Polo" alt="Volkswagen Polo" class="d-block w-100" style="visibility: visible;">
                     </div>
                     <div class="carousel-item">
                         <img src="{{$img_arr[2]}}" title="Volkswagen Polo" alt="Volkswagen Polo" class="d-block w-100" style="visibility: visible;">
@@ -16,7 +17,10 @@
                     <span aria-hidden="true" class="carousel-control-prev-icon"></span>
                 </a> <a href="#carousel-car-{{$id}}" role="button" data-slide="next" class="carousel-control-next">
                     <span aria-hidden="true" class="carousel-control-next-icon"></span>
-                </a></div></div> <div class="about__info-cars"></div>
+                </a>
+            </div>
+        </div>
+        <div class="about__info-cars"></div>
         <div class="card-body">
             <div class="list-card-body">
                 <a href="/ru/catalog/car/{{$id}}">

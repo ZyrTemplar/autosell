@@ -1845,6 +1845,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 $('.carousel').carousel();
 $('.carousel_img').carousel();
 
+function more() {
+  var elem = document.querySelector('#more');
+  elem.innerHTML = "test";
+}
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

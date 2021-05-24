@@ -30,7 +30,7 @@
                     <h2>Тип КПП: {{$about_car['transmission']}}</h2>
                 </div>
                 <div class="col text-center my-3">
-                    <div class="btn btn-warning btn-more" style="border-radius: 30px" data-toggle="modal" data-target="#more">
+                    <div class="btn btn-warning btn-more" style="border-radius: 30px" onclick="more()">
                         <h1 class="mx-auto my-auto">Більше інформації</h1>
                     </div>
                 </div>
@@ -43,7 +43,13 @@
 
 @include('includes.announcement_includes.okno')
 
+<div id="more">
+
+</div>
+
 @include('includes.footer')
+
+<srcript scr="{{asset('js/app.js')}}"></srcript>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
 </body>
