@@ -15,7 +15,7 @@
                             @include('includes.carMini',[$id=$id4])
                             <div class="row mx-auto">
                                 <div class="button-block">
-                                    <a class="icon-btn catalog-icon" href="/ru/catalog">Каталог авто</a>
+                                    <a class="icon-btn catalog-icon" href="/auto">Каталог авто</a>
                                 </div>
                             </div>
                         </div>

@@ -10087,6 +10087,86 @@ h3 {
   background: #e6e6ff;
 }
 
+.modal-custom {
+  min-width: 700px;
+}
+
+.line {
+  border-left: 10px solid darkcyan;
+}
+
+.height-700 {
+  height: 700px !important;
+}
+
+.mt-10 {
+  margin-top: 10%;
+}
+
+.mb-10 {
+  margin-bottom: 10%;
+}
+
+/*html,body {
+    height: 100%;
+    min-height: 100%;
+    flex: 1 0 auto;
+}*/
+.menu-li {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.menu-li:hover {
+  font-size: 28px;
+  background-color: #0c5460;
+}
+
+.active-custom {
+  background-color: #bd2130 !important;
+  text-decoration: none;
+  color: white;
+}
+
+.active-custom:hover {
+  background-color: #bd2130 !important;
+  text-decoration: none;
+  color: white;
+}
+
+.configs {
+  border: black 3px solid;
+  border-radius: 30px;
+  width: 98%;
+  background-color: #C0C0C0;
+  height: 84vh;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.changer {
+  padding-top: 10vh;
+  padding-bottom: 15vh;
+}
+
+.br-20 {
+  border-radius: 20px;
+}
+
+.from-file {
+  background-color: #bd2130 !important;
+}
+
+.item-hidden {
+  display: none !important;
+}
+
+.border-red {
+  border-color: #bd2130 !important;
+}
+
 * {
   font-family: "Cuprum", sans-serif;
 }
@@ -10143,8 +10223,8 @@ p.btn-danger {
 }
 
 .form-select.year {
-  width: 120px;
-  padding-right: 1rem;
+  width: 100%;
+  padding-right: 0;
 }
 
 hr.line {
@@ -10194,6 +10274,10 @@ hr.line {
   max-width: 40vw;
   padding-bottom: 40%;
   padding-top: 40%;
+}
+
+.card-title:hover {
+  text-decoration: none;
 }
 
 .btn {
@@ -10304,6 +10388,14 @@ hr.line {
 .btn.btn-primary {
   background: #E40C25;
   border-color: #E40C25;
+  color: #FFFFFF;
+  font-family: "Comfortaa", cursive;
+  margin-top: 8px;
+}
+
+.btn.btn-secondary {
+  background: #5a6268;
+  border-color: #5a6268;
   color: #FFFFFF;
   font-family: "Comfortaa", cursive;
   margin-top: 8px;

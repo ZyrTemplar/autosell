@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
+            $title='AutoSell';
             $id1=1;
             $id2=2;
             $id3=3;
@@ -21,7 +22,8 @@ class HomeController extends Controller
                 'id2'=>$id2,
                 'id3'=>$id3,
                 'id4'=>$id4,
-                'img_arr'=>$img_arr
+                'img_arr'=>$img_arr,
+                'title'=>$title
             ]);
     }
 }

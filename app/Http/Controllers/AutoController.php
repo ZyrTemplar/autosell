@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auto;
+use App\Models\Brand;
+use App\Models\CarModel;
 use Illuminate\Http\Request;
 
 class AutoController extends Controller
@@ -23,7 +26,9 @@ class AutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('auto.newAuto')->with([
+            'title'=>'Нове авто'
+        ]);
     }
 
     /**
@@ -34,7 +39,31 @@ class AutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dump($request);
+        $request->file('image')->store('uploads','public');
+        Auto::create([
+           'brand'=>$request->brand,
+           'modification'=>$request->modification,
+           'model'=>$request->model,
+           'drive_unit'=>$request->drive_unit,
+           'objem'=>$request->objem,
+           'capacity'=>$request->capacity,
+           'fuel'=>$request->fuel,
+           'transmission'=>$request->transmission,
+           'mileage'=>$request->mileage,
+           'year'=>$request->year_to,
+           'price'=>$request->price,
+           'engine_form'=>$request->engine_form,
+           'speeding'=>$request->speeding,
+           'max_speed'=>$request->max_speed,
+           'doors'=>$request->doors,
+           'places'=>$request->places,
+           'auto_body'=>$request->auto_body,
+           'color'=>$request->color,
+           'town'=>$request->town,
+           'description'=>$request->description,
+           'seller_id'=>auth()->user('id')->id,
+        ]);
     }
 
     /**
@@ -71,9 +100,11 @@ class AutoController extends Controller
             $about_car['town']='Kyiv';
             $about_car['description']='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dignissimos ea ipsam ipsum quia sequi ut voluptatum. Atque consequuntur corporis impedit ipsa maiores nemo quae quaerat sint? Atque, commodi, ratione.' ;
             $about_car['seller_id']='123456789';
+            $title=$about_car['model'];
             return view('announcement')->with([
                 'photos'=>$photos,
                 'about_car'=>$about_car,
+                'title'=>$title
             ]);
     }
 

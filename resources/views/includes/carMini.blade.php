@@ -23,10 +23,10 @@
         <div class="about__info-cars"></div>
         <div class="card-body">
             <div class="list-card-body">
-                <a href="/ru/catalog/car/{{$id}}">
+                <a href="auto/{{$id}}">
                     <table>
                         <tr class="card-title">
-                            <td>Volkswagen Polo</td>
+                            <td class="text-decoration-none">Volkswagen Polo</td>
                             <td class="carYear ml-3">2007</td>
                         </tr>
                     </table>
@@ -60,7 +60,7 @@
                     <td class="price mt-1">140 000</td>
                 </tr>
             </table>
-            <a href="/ru/catalog/car/{{$id}}" class="btn btn-primary">
+            <a href="auto/{{$id}}" class="btn btn-primary">
                 Більше
             </a>
         </div>

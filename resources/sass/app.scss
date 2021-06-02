@@ -63,8 +63,8 @@ p.btn-danger{
 
 
 .form-select.year{
-    width: 120px;
-    padding-right: 1.0rem;
+    width: 100%;
+    padding-right: 0;
 }
 
 hr.line{
@@ -114,7 +114,8 @@ hr.line{
 
 //Стили для вас может заинтересовать
 
-.card-title{
+.card-title:hover{
+    text-decoration: none;
 }
 
 .btn{
@@ -230,3 +231,12 @@ hr.line{
     font-family: "Comfortaa", cursive;
     margin-top: 8px;
 }
+.btn.btn-secondary {
+    background: #5a6268;
+    border-color: #5a6268;
+    color: #FFFFFF;
+    font-family: "Comfortaa", cursive;
+    margin-top: 8px;
+
+}
+
