@@ -1,10 +1,13 @@
 <div class="col-auto mt-2">
+    @foreach($errors->all() as $error)
+        <li class="alert col-4 mx-auto mt-1 alert-danger">{{$error}}</li>
+    @endforeach
     <form class="form-control mx-auto w-75 p-2 h-100" id="new_auto" enctype="multipart/form-data" method="post" action="{{route('auto.store')}}">
         @csrf
-        <div class="border mx-auto text-center br-20 col-3 border-red">
+        <div class="border mx-auto text-center br-20 col-3 border-width-4 border-red">
             <label for="images" class="form-label">Оберіть фото</label>
             <div class="btn btn-danger mb-3" onclick="loadPhoto()">Загрузити фото</div>
-            <input class="form-file ml-4 mt-1 mb-3" id='images' style="display: none" type="file" name="image" multiple accept="image/*">
+            <input class="form-file ml-4 mt-1 mb-3" id='images' style="display: none" type="file" name="image[]" multiple accept="image/*">
             <div class="mb-3">
                 <div id="carousel_img" hidden class="carousel slide">
                     <div id="carousel_imgControls" class="carousel slide">
@@ -23,7 +26,7 @@
             </div>
         </div>
 
-        <div class="border mt-2 pb-3 mx-auto text-center br-20 col-8 border-red">
+        <div class="border mt-2 pb-3 mx-auto text-center border-width-4 br-20 col-8 border-red">
             <h2>Основна інформація</h2>
             <div class="row ">
                 <div class="col-4 ml-auto">
@@ -97,7 +100,7 @@
             </div>
         </div>
 
-        <div class="border mt-2 pb-3 mx-auto text-center br-20 col-8 border-red">
+        <div class="border mt-2 pb-3 mx-auto text-center border-width-4 br-20 col-8 border-red">
             <h2>Додаткова інформація</h2>
             <div class="row ">
                 <div class="col-4 ml-auto">
@@ -105,7 +108,7 @@
                     <input class="form-control form-select" name="objem" id="objem" placeholder="5.0" type="text">
                 </div>
                 <div class="col-4 mr-auto">
-                    <label for="capacity" class="form-label">Місткість багажнику</label>
+                    <label for="capacity" class="form-label">Потужність</label>
                     <input class="form-control form-select" name="capacity" id="capacity" placeholder="575" type="text">
                 </div>
             </div>
@@ -127,12 +130,12 @@
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="speeding" class="form-label">Розгін до 100км/год</label>
-                    <input class="form-control form-select" name="speeding" id="speeding" placeholder="5 секунд" type="text">
+                    <input class="form-control form-select" name="speeding" id="speeding" placeholder="5" type="text">
                 </div>
             </div>
             <div class="row ">
                 <div class="col-4 ml-auto">
-                    <label for=" col-5 max_speed" class="form-label">Максимальна швидкість</label><br>
+                    <label for="max_speed" class="form-label">Максимальна швидкість</label><br>
                     <input class=" form-control form-select" name="max_speed" id="max_speed" placeholder="185 км/год" type="text">
                 </div>
                 <div class="col-4 mr-auto">
@@ -147,11 +150,11 @@
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="auto_body" class=" form-label">Тип кузова</label><br>
-                    <input class=" form-control form-select" name="auto_body" id="auto_body" placeholder="SUV" type="text">
+                    <input class=" form-control form-select" name="auto_body" id="auto_body" required placeholder="SUV" type="text">
                 </div>
             </div>
         </div>
-        <div class="border mt-2 pb-3 mx-auto text-center br-20 col-8 border-red">
+        <div class="border mt-2 pb-3 mx-auto text-center border-width-4 br-20 col-8 border-red">
             <h2>Опис автомобіля</h2>
             <textarea class="form-control form-select" required name="description" id="description" cols="30" rows="6"></textarea>
         </div>
@@ -160,4 +163,25 @@
         </div>
     </form>
 </div>
+<script>
+    function handleFileSelect(evt) {
+        $('#here').empty();
+        let file = evt.target.files;
+        for (let i = 0, f; f = file[i]; i++) {
+            let reader = new FileReader();
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    var div = document.createElement('div');
+                    if (i===0){div.setAttribute('class','carousel-item active')}
+                    else{div.setAttribute('class','carousel-item')}
+                    div.innerHTML = ['<img class="img-fluid" src="', e.target.result, '" alt="...">'].join('');
+                    document.getElementById('here').insertBefore(div, null);
+                };
+            })(f);
+            reader.readAsDataURL(f);
+            document.getElementById('carousel_img').removeAttribute('hidden');
+        }
+    }
+    document.getElementById('images').addEventListener('change', handleFileSelect, false);
+</script>
 

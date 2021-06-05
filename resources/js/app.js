@@ -30,6 +30,12 @@ window.getModel=function(){
     $('#year_to').find('option').remove();
     $('#model').find('option').remove();
     let brand=$('#brand').val();
+    if (brand=='all'){
+        let item = '<option value="all">Всі</option>';
+        $('#model').append(item)
+        $('#year_from').append(item)
+        $('#year_to').append(item)
+    }
     $.ajax({
         url: 'http://127.0.0.1:8000/ajax/getAllCars',
         dataType: 'json',
@@ -40,8 +46,15 @@ window.getModel=function(){
                     $('#model').append(item)
                 }
             }
-            let startDate=data[0].start_year
-            let finishDate=data[0].finish_year
+            let model=$('#model').val();
+            let startDate=0;
+            let finishDate=0;
+            for (let i = 0; i <data.length; i++) {
+                if (data[i].model===model){
+                    startDate=data[i].start_year;
+                    finishDate=data[i].finish_year;
+                }
+            }
             if (finishDate==='-') finishDate=2021
             for (let i=startDate;i<=finishDate;i++){
                 let item = '<option value="' + i+'">'+i+'</option>';
@@ -56,6 +69,7 @@ window.getYear=function(){
     $('#year_from').find('option').remove();
     $('#year_to').find('option').remove();
     let model=$('#model').val();
+    console.log(model);
     let startDate=0;
     let finishDate=0;
     $.ajax({
@@ -119,30 +133,134 @@ window.change_menu =function (id) {
             }
         })
     }
-}
 
-function handleFileSelect(evt) {
-    $('#here').empty();
-    let file = evt.target.files;
-    for (let i = 0, f; f = file[i]; i++) {
-        let reader = new FileReader();
-        reader.onload = (function (theFile) {
-            return function (e) {
-                var div = document.createElement('div');
-                if (i===0){div.setAttribute('class','carousel-item active')}
-                else{div.setAttribute('class','carousel-item')}
-                div.innerHTML = ['<img class="img-fluid" src="', e.target.result, '" alt="...">'].join('');
-                document.getElementById('here').insertBefore(div, null);
-            };
-        })(f);
-        reader.readAsDataURL(f);
-        document.getElementById('carousel_img').removeAttribute('hidden');
+    if (id==='my_auto'){
+        $('.configs').html('<div id="interest-tab" class="row"><div class="col">\n' +
+            '                <div id="pills-tabContent" class="tab-content" style="min-height: 413px;">\n' +
+            '                    <div id="all" role="tabpanel" aria-labelledby="all-tab" class="tab-pane fade show active">\n' +
+            '                        <div id="all-cars-list" class="row p-3">\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>')
+        $.ajax({
+            url: "/ajax/getMyCars",
+            method: 'GET',
+            data:  { 'answered': '1' },
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function(data) {
+                for (let i=0;i<data.length;i++){
+                    let id=data[i].id
+                    let photos=[
+                        data[i].photo1,
+                        data[i].photo2,
+                        data[i].photo3,
+                        data[i].photo4,
+                        data[i].photo5,
+                        data[i].photo6,
+                        data[i].photo7,
+                        data[i].photo8,
+                        data[i].photo9,
+                        data[i].photo10,
+                    ]
+                    let model=data[i].model
+                    let brand=data[i].brand
+                    let fuel=data[i].fuel
+                    let year=data[i].year
+                    let mileage=data[i].mileage
+                    let auto_body=data[i].auto_body
+                    let transmission=data[i].transmission
+                    let drive_unit=data[i].drive_unit
+                    let price=data[i].price
+                    for (let j=0;j<10;j++){
+                        if (photos[j]==null){
+                            photos.splice(j,10-j);
+                        }
+                    }
+                    $('#all-cars-list').append(`<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 mt-4">
+                            <div class="card">
+                                <div class="car-preview-img">
+                                    <div id="carousel-car-${id}" data-interval="false" data-ride="carousel" class="carousel slide w-100">
+                                        <div class="carousel-inner" id="inner-${id}">`)
+                    $('#inner-'+id).append(`<div class="carousel-item active">
+                                            <img src="storage/${photos[0]}" title="${brand+' '+model}" alt="${brand+' '+model}" class="d-block w-100" style="visibility: visible;">
+                                        </div>`)
+                    if (photos.length>=0){
+                        for (let j=1; j<photos.length;j++) {
+                            $('#inner-'+id).append(
+                                `<div class="carousel-item">
+                                <img src="storage/${photos[j]}" title="${brand+' '+model}" alt="${brand+' '+model}" class="d-block w-100" style="visibility: visible;">
+                                </div>`)
+                    }
+                    }
+                    $('#carousel-car-'+id).append(`</div>
+                                        <a href="#carousel-car-${id}" role="button" data-slide="prev" class="carousel-control-prev">
+                                            <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+                                        </a> <a href="#carousel-car-${id}" role="button" data-slide="next" class="carousel-control-next">
+                                            <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="about__info-cars"></div>
+                                <div class="card-body">
+                                    <div class="list-card-body">
+                                       <a href="auto/${id}">
+                                           <table>
+                                                <tr class="card-title ">
+                                                    <td class="text-decoration-none col-auto pl-0 height-60">${brand+' '+model}</td>
+                                                   <td class="carYear col-auto mt-3">${year}</td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                   </div>
+                                    <span class="old-car">
+                                        <i class="fas old-car-icon"></i>
+                                        <span>${mileage} км</span>
+                                    </span>
+                                    <div class="row car-info">
+                                        <div class="col-7 pr-1">
+                                            <div class="car-info__specifications">
+                                                <i class="param_icons pr-1"><img src="/img/about_car/kuzov_icon.png" alt=""></i>${auto_body}
+                                            </div>
+                                            <div class="car-info__specifications">
+                                               <i class="param_icons"><img src="/img/about_car/geadrsgift_icon.png" alt=""></i>${transmission}
+                                            </div>
+                                        </div>
+                                        <div class="col-5 pr-1 pl-1">
+                                            <div class="car-info__specifications">
+                                                <i class="param_icons"><img src="/img/about_car/engine_icon.png" alt=""></i>${fuel}
+                                            </div>
+                                            <div class="car-info__specifications">
+                                                <i class="param_icons"><img src="/img/about_car/privod_icon.png" alt=""></i>${drive_unit}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table>
+                                        <tr>
+                                            <td> <img class="mr-1" src="/img/valuta/grn.png" alt=""></td>
+                                            <td class="price mt-1">${price}</td>
+                                        </tr>
+                                    </table>
+                                   <a href="auto/${id}" class="btn btn-primary">
+                                        Більше
+                                    </a>
+                                </div>
+                            </div>
+                          </div>`)
+                }
+            },
+            error: function() {
+                console.log('error')
+            }
+        })
     }
 }
-document.getElementById('images').addEventListener('change', handleFileSelect, false);
+
+
 
 $(function() {
-
     let
         max_file_number = 10,
         $form = $('#new_auto'),

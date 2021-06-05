@@ -25,6 +25,7 @@
                     <h3>Кількість місць: {{$about_car['places']}} </h3>
                     <h3>Тип кузову: {{$about_car['auto_body']}} </h3>
                     <h3>Колір: {{$about_car['color']}} </h3>
+                    <h3>Область знаходження: {{$about_car['oblast']}} </h3>
                     <h3>Місто знаходження: {{$about_car['town']}} </h3>
                     <h3>Опис від продавця: {{$about_car['description']}} </h3>
                 </div>

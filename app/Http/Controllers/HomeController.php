@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auto;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,18 +13,39 @@ class HomeController extends Controller
             $id2=2;
             $id3=3;
             $id4=4;
-            $img_arr=[
-                asset('/img/range2.jpg'),
-                asset('/img/range3.jpg'),
-                asset('/img/land-rover-range-rover-sport-2021.jpg')
-            ];
+            $images=array();
+            $cars_array=array(
+                'car1'=> Auto::find($id1),
+                'car2'=> Auto::find($id2),
+                'car3'=> Auto::find($id3),
+                'car4'=> Auto::find($id4),
+            );
+            $car_number=1;
+            foreach ($cars_array as $value){
+                $img=[
+                  $value->photo1,
+                  $value->photo2,
+                  $value->photo3,
+                  $value->photo4,
+                  $value->photo5,
+                  $value->photo6,
+                  $value->photo7,
+                  $value->photo8,
+                  $value->photo9,
+                  $value->photo10,
+                ];
+                for ($i=0;$i<10;$i++){
+                    if ($img[$i]==NULL){
+                        unset($img[$i]);
+                    }
+                }
+                $images['car'.$car_number] = $img;
+                $car_number++;
+            }
             return view('home')->with([
-                'id1'=>$id1,
-                'id2'=>$id2,
-                'id3'=>$id3,
-                'id4'=>$id4,
-                'img_arr'=>$img_arr,
-                'title'=>$title
+                'cars_array'=>$cars_array,
+                'images'=>$images,
+                'title'=>$title,
             ]);
     }
 }

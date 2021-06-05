@@ -10167,6 +10167,18 @@ h3 {
   border-color: #bd2130 !important;
 }
 
+.border-width-4 {
+  border-width: 4px !important;
+}
+
+.height-60 {
+  height: 60px;
+}
+
+.card-title {
+  text-decoration: none;
+}
+
 * {
   font-family: "Cuprum", sans-serif;
 }

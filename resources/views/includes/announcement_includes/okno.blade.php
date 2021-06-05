@@ -8,25 +8,26 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form action="/send_message" method="post" id="message_form">
+                    @csrf
                     <label for="model" class="form-label">Модель авто</label>
-                    <input class="form-control" id="model" type="text" placeholder="{{$about_car['brand']}} {{$about_car['model']}}" readonly>
+                    <input type="text" name="car_id" hidden value="{{$about_car['id']}}">
+                    <input class="form-control" name="model" id="model" type="text" value="{{$about_car['brand']}} {{$about_car['model']}}" readonly>
 
-                    <label for="Name" class="form-label">Ведіть ваше ім'я</label>
-                    <input type="text" id="Name" class="form-control" placeholder="Ім'я" required>
+                    <label for="name" class="form-label">Введіть ваше ім'я</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Ім'я" required>
 
-                    <label for="Number" class="form-label">Ведіть ваш номер телефону</label>
-                    <input type="text" id="Number" class="form-control" placeholder="098-123-4567" required>
+                    <label for="number" class="form-label">Введіть ваш номер телефону</label>
+                    <input type="text" name="number" id="number" class="form-control" placeholder="098-123-4567" required>
 
-                    <label for="E-mail" class="form-label">Ведіть ваш e-mail (не обов'язково)</label>
-                    <input type="email" id="E-mail" class="form-control" placeholder="example@gmail.com">
+                    <label for="e-mail" class="form-label">Введіть ваш e-mail (не обов'язково)</label>
+                    <input type="email" name="email" id="e-mail" class="form-control" placeholder="example@example.com">
 
-                    <label for="Price" class="form-label">Ваша пропозиція ціни (не обов'язково)</label>
-                    <input type="text" id="Price" class="form-control" placeholder="10 000$">
-
+                    <label for="price" class="form-label">Ваша пропозиція ціни (не обов'язково)</label>
+                    <input type="text" name="price" id="price" class="form-control" placeholder="10 000$">
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-buy btn-success">Відправити</button>
+                <button class="btn btn-buy btn-success" id="send_message">Відправити</button>
             </div>
             </form>
         </div>

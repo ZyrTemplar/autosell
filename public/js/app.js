@@ -1873,26 +1873,44 @@ window.getModel = function () {
   $('#year_to').find('option').remove();
   $('#model').find('option').remove();
   var brand = $('#brand').val();
+
+  if (brand == 'all') {
+    var item = '<option value="all">Всі</option>';
+    $('#model').append(item);
+    $('#year_from').append(item);
+    $('#year_to').append(item);
+  }
+
   $.ajax({
     url: 'http://127.0.0.1:8000/ajax/getAllCars',
     dataType: 'json',
     success: function success(data) {
       for (var i = 0; i < data.length; i++) {
         if (data[i].brand === brand) {
-          var item = '<option value="' + data[i].model + '">' + data[i].model + '</option>';
-          $('#model').append(item);
+          var _item = '<option value="' + data[i].model + '">' + data[i].model + '</option>';
+
+          $('#model').append(_item);
         }
       }
 
-      var startDate = data[0].start_year;
-      var finishDate = data[0].finish_year;
+      var model = $('#model').val();
+      var startDate = 0;
+      var finishDate = 0;
+
+      for (var _i = 0; _i < data.length; _i++) {
+        if (data[_i].model === model) {
+          startDate = data[_i].start_year;
+          finishDate = data[_i].finish_year;
+        }
+      }
+
       if (finishDate === '-') finishDate = 2021;
 
-      for (var _i = startDate; _i <= finishDate; _i++) {
-        var _item = '<option value="' + _i + '">' + _i + '</option>';
+      for (var _i2 = startDate; _i2 <= finishDate; _i2++) {
+        var _item2 = '<option value="' + _i2 + '">' + _i2 + '</option>';
 
-        $('#year_from').append(_item);
-        $('#year_to').append(_item);
+        $('#year_from').append(_item2);
+        $('#year_to').append(_item2);
       }
     }
   });
@@ -1902,6 +1920,7 @@ window.getYear = function () {
   $('#year_from').find('option').remove();
   $('#year_to').find('option').remove();
   var model = $('#model').val();
+  console.log(model);
   var startDate = 0;
   var finishDate = 0;
   $.ajax({
@@ -1917,8 +1936,8 @@ window.getYear = function () {
 
       if (finishDate === '-') finishDate = 2021;
 
-      for (var _i2 = startDate; _i2 <= finishDate; _i2++) {
-        var item = '<option value="' + _i2 + '">' + _i2 + '</option>';
+      for (var _i3 = startDate; _i3 <= finishDate; _i3++) {
+        var item = '<option value="' + _i3 + '">' + _i3 + '</option>';
         $('#year_from').append(item);
         $('#year_to').append(item);
       }
@@ -1952,40 +1971,57 @@ window.change_menu = function (id) {
       }
     });
   }
+
+  if (id === 'my_auto') {
+    $('.configs').html('<div id="interest-tab" class="row"><div class="col">\n' + '                <div id="pills-tabContent" class="tab-content" style="min-height: 413px;">\n' + '                    <div id="all" role="tabpanel" aria-labelledby="all-tab" class="tab-pane fade show active">\n' + '                        <div id="all-cars-list" class="row p-3">\n' + '                    </div>\n' + '                </div>\n' + '            </div>\n' + '        </div>');
+    $.ajax({
+      url: "/ajax/getMyCars",
+      method: 'GET',
+      data: {
+        'answered': '1'
+      },
+      processData: false,
+      contentType: false,
+      cache: false,
+      success: function success(data) {
+        for (var i = 0; i < data.length; i++) {
+          var _id = data[i].id;
+          var photos = [data[i].photo1, data[i].photo2, data[i].photo3, data[i].photo4, data[i].photo5, data[i].photo6, data[i].photo7, data[i].photo8, data[i].photo9, data[i].photo10];
+          var model = data[i].model;
+          var brand = data[i].brand;
+          var fuel = data[i].fuel;
+          var year = data[i].year;
+          var mileage = data[i].mileage;
+          var auto_body = data[i].auto_body;
+          var transmission = data[i].transmission;
+          var drive_unit = data[i].drive_unit;
+          var price = data[i].price;
+
+          for (var j = 0; j < 10; j++) {
+            if (photos[j] == null) {
+              photos.splice(j, 10 - j);
+            }
+          }
+
+          $('#all-cars-list').append("<div class=\"col-sm-12 col-md-6 col-lg-6 col-xl-3 mt-4\">\n                            <div class=\"card\">\n                                <div class=\"car-preview-img\">\n                                    <div id=\"carousel-car-".concat(_id, "\" data-interval=\"false\" data-ride=\"carousel\" class=\"carousel slide w-100\">\n                                        <div class=\"carousel-inner\" id=\"inner-").concat(_id, "\">"));
+          $('#inner-' + _id).append("<div class=\"carousel-item active\">\n                                            <img src=\"storage/".concat(photos[0], "\" title=\"").concat(brand + ' ' + model, "\" alt=\"").concat(brand + ' ' + model, "\" class=\"d-block w-100\" style=\"visibility: visible;\">\n                                        </div>"));
+
+          if (photos.length >= 0) {
+            for (var _j = 1; _j < photos.length; _j++) {
+              $('#inner-' + _id).append("<div class=\"carousel-item\">\n                                <img src=\"storage/".concat(photos[_j], "\" title=\"").concat(brand + ' ' + model, "\" alt=\"").concat(brand + ' ' + model, "\" class=\"d-block w-100\" style=\"visibility: visible;\">\n                                </div>"));
+            }
+          }
+
+          $('#carousel-car-' + _id).append("</div>\n                                        <a href=\"#carousel-car-".concat(_id, "\" role=\"button\" data-slide=\"prev\" class=\"carousel-control-prev\">\n                                            <span aria-hidden=\"true\" class=\"carousel-control-prev-icon\"></span>\n                                        </a> <a href=\"#carousel-car-").concat(_id, "\" role=\"button\" data-slide=\"next\" class=\"carousel-control-next\">\n                                            <span aria-hidden=\"true\" class=\"carousel-control-next-icon\"></span>\n                                        </a>\n                                    </div>\n                                </div>\n                                <div class=\"about__info-cars\"></div>\n                                <div class=\"card-body\">\n                                    <div class=\"list-card-body\">\n                                       <a href=\"auto/").concat(_id, "\">\n                                           <table>\n                                                <tr class=\"card-title \">\n                                                    <td class=\"text-decoration-none col-auto pl-0 height-60\">").concat(brand + ' ' + model, "</td>\n                                                   <td class=\"carYear col-auto mt-3\">").concat(year, "</td>\n                                                </tr>\n                                            </table>\n                                        </a>\n                                   </div>\n                                    <span class=\"old-car\">\n                                        <i class=\"fas old-car-icon\"></i>\n                                        <span>").concat(mileage, " \u043A\u043C</span>\n                                    </span>\n                                    <div class=\"row car-info\">\n                                        <div class=\"col-7 pr-1\">\n                                            <div class=\"car-info__specifications\">\n                                                <i class=\"param_icons pr-1\"><img src=\"/img/about_car/kuzov_icon.png\" alt=\"\"></i>").concat(auto_body, "\n                                            </div>\n                                            <div class=\"car-info__specifications\">\n                                               <i class=\"param_icons\"><img src=\"/img/about_car/geadrsgift_icon.png\" alt=\"\"></i>").concat(transmission, "\n                                            </div>\n                                        </div>\n                                        <div class=\"col-5 pr-1 pl-1\">\n                                            <div class=\"car-info__specifications\">\n                                                <i class=\"param_icons\"><img src=\"/img/about_car/engine_icon.png\" alt=\"\"></i>").concat(fuel, "\n                                            </div>\n                                            <div class=\"car-info__specifications\">\n                                                <i class=\"param_icons\"><img src=\"/img/about_car/privod_icon.png\" alt=\"\"></i>").concat(drive_unit, "\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <table>\n                                        <tr>\n                                            <td> <img class=\"mr-1\" src=\"/img/valuta/grn.png\" alt=\"\"></td>\n                                            <td class=\"price mt-1\">").concat(price, "</td>\n                                        </tr>\n                                    </table>\n                                   <a href=\"auto/").concat(_id, "\" class=\"btn btn-primary\">\n                                        \u0411\u0456\u043B\u044C\u0448\u0435\n                                    </a>\n                                </div>\n                            </div>\n                          </div>"));
+        }
+      },
+      error: function error() {
+        console.log('error');
+      }
+    });
+  }
 };
 
-function handleFileSelect(evt) {
-  $('#here').empty();
-  var file = evt.target.files;
-
-  var _loop = function _loop(i, f) {
-    var reader = new FileReader();
-
-    reader.onload = function (theFile) {
-      return function (e) {
-        var div = document.createElement('div');
-
-        if (i === 0) {
-          div.setAttribute('class', 'carousel-item active');
-        } else {
-          div.setAttribute('class', 'carousel-item');
-        }
-
-        div.innerHTML = ['<img class="img-fluid" src="', e.target.result, '" alt="...">'].join('');
-        document.getElementById('here').insertBefore(div, null);
-      };
-    }(f);
-
-    reader.readAsDataURL(f);
-    document.getElementById('carousel_img').removeAttribute('hidden');
-  };
-
-  for (var i = 0, f; f = file[i]; i++) {
-    _loop(i, f);
-  }
-}
-
-document.getElementById('images').addEventListener('change', handleFileSelect, false);
 $(function () {
   var max_file_number = 10,
       $form = $('#new_auto'),

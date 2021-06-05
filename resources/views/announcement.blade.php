@@ -12,6 +12,16 @@
 
 @include('includes.announcement_includes.more')
 
+@if(\Illuminate\Support\Facades\Auth::check())
+
+    @if(auth()->user()->id==$about_car['seller_id'])
+
+        @include('includes.announcement_includes.table')
+
+    @endif
+
+@endif
+
 @include('includes.footer')
 
 @endsection

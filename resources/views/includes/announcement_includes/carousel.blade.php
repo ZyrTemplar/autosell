@@ -5,9 +5,11 @@
                 <img class="img-fluid" src="{{$photos[0]}}" alt="...">
             </div>
             @for($i=1; $i<count($photos); $i++)
+                @if($photos[$i]!='http://127.0.0.1:8000/storage')
                 <div class="carousel-item auto">
                     <img class="img-fluid" src="{{$photos[$i]}}" alt="...">
                 </div>
+                @endif
             @endfor
         </div>
     </div>

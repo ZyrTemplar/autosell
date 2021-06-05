@@ -29,8 +29,13 @@ Route::post('/login', '\App\Http\Controllers\UserController@login')->name('login
 
 Route::get('/logout', '\App\Http\Controllers\UserController@logout')->name('logout');
 
+Route::get('/sort', '\App\Http\Controllers\SortController@miniSerach');
+
+Route::post('/send_message', '\App\Http\Controllers\MessageController@store');
+
 
 /*Конроллеры под ajax*/
 
 Route::get('/ajax/getUser','\App\Http\Controllers\CabinetController@getUser')->name('ajaxGetUser');
 Route::get('/ajax/getAllCars','\App\Http\Controllers\AllCarsController@getAllCars')->name('getAllCars');
+Route::get('/ajax/getMyCars','\App\Http\Controllers\CabinetController@getMyAutos');

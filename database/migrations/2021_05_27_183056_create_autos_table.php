@@ -34,6 +34,7 @@ class CreateAutosTable extends Migration
             $table->string('auto_body')->nullable();
             $table->string('color')->nullable();
             $table->string('town');
+            $table->string('oblast')->nullable();
             $table->string('description');
             $table->string('seller_id');
             $table->string('photo1')->nullable();
