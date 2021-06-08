@@ -33,6 +33,13 @@ Route::get('/sort', '\App\Http\Controllers\SortController@miniSerach');
 
 Route::post('/send_message', '\App\Http\Controllers\MessageController@store');
 
+Route::group(['prefix'=>'admin'],function (){
+    Route::get('/autos',"\App\Http\Controllers\AdminController@autos")->name('admin_autos');
+    Route::get('/users',"\App\Http\Controllers\AdminController@users")->name('admin_users');
+    Route::post('/userDelete', '\App\Http\Controllers\UserController@userDelete')->name('admin_deleteUser');
+});
+
+
 
 /*Конроллеры под ajax*/
 

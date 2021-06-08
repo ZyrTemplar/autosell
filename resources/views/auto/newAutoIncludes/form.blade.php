@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="drive_unit" class="form-label">Тип приводу</label>
-                    <select class="form-select" name="drive_unit" id="drive_unit" required>
+                    <select class="form-select @error('drive_unit') is-invalid @enderror" name="drive_unit" id="drive_unit" required>
                         <option value="Передній">Передній</option>
                         <option value="Задній">Задній</option>
                         <option value="Повний">Повний</option>
@@ -61,7 +61,7 @@
             <div class="row ">
                 <div class="col-4 ml-auto">
                     <label for="price" class="form-label">Ціна</label>
-                    <input class="form-control form-select" name="price" id="price" required placeholder="$" type="text">
+                    <input class="form-control form-select @error('price') is-invalid @enderror" name="price" id="price" required placeholder="$" type="text">
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="transmission" class="form-label">Тип КПП</label>
@@ -74,17 +74,17 @@
             <div class="row ">
                 <div class="col-4 ml-auto">
                     <label for="oblast" class="form-label">Область</label>
-                    <input class="form-control form-select" name="oblast" id="oblast" required placeholder="Київська" type="text">
+                    <input class="form-control form-select @error('oblast') is-invalid @enderror" name="oblast" id="oblast" required placeholder="Київська" type="text">
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="town" class="form-label">Місто</label>
-                    <input class="form-control form-select" name="town" id="town" required placeholder="Київ" type="text">
+                    <input class="form-control form-select @error('town') is-invalid @enderror" name="town" id="town" required placeholder="Київ" type="text">
                 </div>
             </div>
             <div class="row ">
                 <div class="col-4 ml-auto">
                     <label for="mileage" class="form-label">Пробіг</label>
-                    <input class="form-control form-select" name="mileage" id="mileage" required placeholder="км" type="text">
+                    <input class="form-control form-select @error('mileage') is-invalid @enderror" name="mileage" id="mileage" required placeholder="км" type="text">
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="fuel" class="form-label">Тип палива</label>
@@ -105,58 +105,58 @@
             <div class="row ">
                 <div class="col-4 ml-auto">
                     <label for="objem" class="form-label">Об'єм</label>
-                    <input class="form-control form-select" name="objem" id="objem" placeholder="5.0" type="text">
+                    <input class="form-control form-select @error('objem') is-invalid @enderror" name="objem" id="objem" placeholder="5.0" type="text">
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="capacity" class="form-label">Потужність</label>
-                    <input class="form-control form-select" name="capacity" id="capacity" placeholder="575" type="text">
+                    <input class="form-control form-select @error('capacity') is-invalid @enderror" name="capacity" id="capacity" placeholder="575" type="text">
                 </div>
             </div>
             <div class="row ">
                 <div class="col-4 ml-auto">
                     <label for="color" class="form-label">Колір</label>
-                    <input class="form-control form-select" name="color" id="color"  placeholder="Рожевий" type="text">
+                    <input class="form-control form-select @error('color') is-invalid @enderror" name="color" id="color"  placeholder="Рожевий" type="text">
                 </div>
 
                 <div class="col-4 mr-auto">
                     <label for="modification" class="form-label" >Модифікація(рестайлінг)</label><br>
-                    <input class="form-control form-select" name="modification" id="modification" type="text">
+                    <input class="form-control form-select @error('modification') is-invalid @enderror" name="modification" id="modification" type="text">
                 </div>
             </div>
             <div class="row ">
                 <div class="col-4 ml-auto">
                     <label for="engine_form" class="form-label">Тип двигуна</label>
-                    <input class="form-control form-select" name="engine_form" id="engine_form" placeholder="V8" type="text">
+                    <input class="form-control form-select @error('engine_form') is-invalid @enderror" name="engine_form" id="engine_form" placeholder="V8" type="text">
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="speeding" class="form-label">Розгін до 100км/год</label>
-                    <input class="form-control form-select" name="speeding" id="speeding" placeholder="5" type="text">
+                    <input class="form-control form-select @error('speeding') is-invalid @enderror" name="speeding" id="speeding" placeholder="5" type="text">
                 </div>
             </div>
             <div class="row ">
                 <div class="col-4 ml-auto">
                     <label for="max_speed" class="form-label">Максимальна швидкість</label><br>
-                    <input class=" form-control form-select" name="max_speed" id="max_speed" placeholder="185 км/год" type="text">
+                    <input class=" form-control form-select @error('max_speed') is-invalid @enderror" name="max_speed" id="max_speed" placeholder="185 км/год" type="text">
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="doors" class="col-auto form-label">Кількість дверей</label><br>
-                    <input class="form-control form-select" name="doors" id="doors" placeholder="5" type="text">
+                    <input class="form-control form-select @error('doors') is-invalid @enderror" name="doors" id="doors" placeholder="5" type="text">
                 </div>
             </div>
             <div class="row ">
                 <div class="col-4 ml-auto">
                     <label for="places" class=" form-label">Кількість місць</label>
-                    <input class="  form-control form-select" name="places" id="places" placeholder="5" type="text">
+                    <input class="  form-control form-select @error('places') is-invalid @enderror" name="places" id="places" placeholder="5" type="text">
                 </div>
                 <div class="col-4 mr-auto">
                     <label for="auto_body" class=" form-label">Тип кузова</label><br>
-                    <input class=" form-control form-select" name="auto_body" id="auto_body" required placeholder="SUV" type="text">
+                    <input class=" form-control form-select @error('auto_body') is-invalid @enderror" name="auto_body" id="auto_body" required placeholder="SUV" type="text">
                 </div>
             </div>
         </div>
         <div class="border mt-2 pb-3 mx-auto text-center border-width-4 br-20 col-8 border-red">
             <h2>Опис автомобіля</h2>
-            <textarea class="form-control form-select" required name="description" id="description" cols="30" rows="6"></textarea>
+            <textarea class="form-control form-select @error('description') is-invalid @enderror" required name="description" id="description" cols="30" rows="6"></textarea>
         </div>
         <div class="col text-center my-4">
             <button id="submit_auto" type="submit" class="col-5 align-self-end mx-auto btn btn-danger" style="font-size: 30px">Розмістити оголошення</button>

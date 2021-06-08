@@ -9,3 +9,9 @@
     </div>
     @include('includes.footer')
 @endsection
+
+@section('custom_scripts')
+    <script>
+        document.onload(change_menu('my_auto'));
+    </script>
+@endsection

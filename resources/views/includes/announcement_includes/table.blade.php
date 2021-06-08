@@ -21,3 +21,8 @@
     @endfor
     </tbody>
 </table>
+<form class="text-center" action="{{route('auto.destroy',['auto'=>$about_car->id])}}" method="post">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="col-2 btn btn-danger" style="color: black">Видалити</button>
+</form>

@@ -65,4 +65,3 @@
         </div>
     </div>
 </section>
-<hr class="align-self-center line" color=#454545>

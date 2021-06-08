@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\CarModel;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AutoController extends Controller
 {
@@ -69,23 +70,48 @@ class AutoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules=[
             'modification'=>'sometimes|nullable|string|max:40',
             'objem'=>'sometimes|nullable|numeric|max:12',
-            'capacity'=>'sometimes|nullable|integer|max:1000',
-            'mileage'=>'integer|max:99999999',
-            'price'=>'required|integer|max:99999999',
+            'capacity'=>'sometimes|nullable|numeric|max:1000',
+            'mileage'=>'numeric|max:99999999',
+            'price'=>'required|numeric|max:99999999',
             'engine_form'=>'sometimes|nullable|string|max:30',
             'speeding'=>'sometimes|nullable|string|max:12',
-            'max_speed'=>'sometimes|nullable|integer|max:500',
-            'doors'=>'sometimes|nullable|integer|max:12',
-            'places'=>'sometimes|nullable|integer|max:12',
+            'max_speed'=>'sometimes|nullable|numeric|max:500',
+            'doors'=>'sometimes|nullable|numeric|max:12',
+            'places'=>'sometimes|nullable|numeric|max:12',
             'auto_body'=>'required|string|max:255',
             'color'=>'sometimes|nullable|string|max:255',
             'town'=>'sometimes|nullable|string|max:255',
             'oblast'=>'sometimes|nullable|string|max:255',
             'description'=>'string|max:1000',
-        ]);
+        ];
+        $messages=[
+            'modification.max'=>'Поле модифікація повинно містити не більше 40 симвлів',
+            'objem.max'=>"Поле об'єм повинно містити не більше 12 симвлів",
+            'capacity.max'=>"Поле потужності повинно бути не більше 1000",
+            'mileage.max'=>"Поле пробіг повинно бути не більше 10000000",
+            'price.max'=>"Поле ціна повинно бути не більше 10000000",
+            'engine_form.max'=>"Поле форми двигуна повинно бути не більше 30 символів",
+            'speeding.max'=>"Поле розгону повинно бути не більше 12 символів",
+            'max_speed.max'=>"Поле максимальна швидкость повинно бути не більше 500",
+            'doors.max'=>"Поле кількості дверей повинно бути не більше 12",
+            'places.max'=>"Поле кількості місць повинно бути не більше 12",
+            'auto_body.max'=>"Поле типу кузову повинно бути не більше 255 символів",
+            'color.max'=>"Поле колір повинно бути не більше 255 символів",
+            'town.max'=>"Поле місто повинно бути не більше 255 символів",
+            'oblast.max'=>"Поле область повинно бути не більше 255 символів",
+            'description.max'=>"Поле область повинно бути не більше 1000 символів",
+            'objem.numeric'=>"Поле об'єм повинно містити лише числа",
+            'capacity.numeric'=>"Поле потужність повинно містити лише числа",
+            'mileage.numeric'=>"Поле пробіг повинно містити лише числа",
+            'price.numeric'=>"Поле ціна повинно містити лише числа",
+            'max_speed.numeric'=>"Поле максимальна швидкість повинно містити лише числа",
+            'doors.numeric'=>"Поле кількість дверей повинно містити лише числа",
+            'places.numeric'=>"Поле кількість місць повинно містити лише числа",
+        ];
+        $validator=Validator::make($request->all(),$rules,$messages)->validate();
 
         for ($i=0;$i<count($request->image);$i++){
             $images[$i] = $request->image[$i]->store('uploads', 'public');
@@ -126,7 +152,6 @@ class AutoController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
 
@@ -180,10 +205,17 @@ class AutoController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        Auto::destroy($id);
+        $messages=Message::where('auto_id','=',$id)->get();
+        foreach ($messages as $value){
+            $value->delete();
+        }
+        if (auth()->user()->email=='admin@admin'){
+            return redirect(route('/admin/autos'));
+        }
+        return redirect('/cabinet');
     }
 }

@@ -8,12 +8,16 @@
                 <div class="mr-3 ml-auto">
                     {{$about_car['price']}} $
                 </div>
-                @if(\Illuminate\Support\Facades\Auth::check())
+                @if(\Illuminate\Support\Facades\Auth::check()==true)
                     @if(auth()->user()->id!=$about_car['seller_id'])
                     <div class="col btn btn-buy btn-success ml-0 mb-2 mr-4" data-toggle="modal" data-target="#exampleModalCenter">
                         Придбати
                     </div>
                     @endif
+                @else
+                    <div class="col btn btn-buy btn-success ml-0 mb-2 mr-4" data-toggle="modal" data-target="#exampleModalCenter">
+                        Придбати
+                    </div>
                 @endif
             </div>
         </div>

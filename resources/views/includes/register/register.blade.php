@@ -26,7 +26,7 @@
 
     <div class="form-group w-50 mx-auto">
         <h2><label for="number">Ваш мобільний номер</label></h2>
-        <input type="tel" class="form-control @error('number') is-invalid @enderror" placeholder="380 xx xxx xxxx" id="number" name="number" value="{{old('number')}}">
+        <input type="number" class="form-control @error('number') is-invalid @enderror" placeholder="380 xx xxx xxxx" id="number" name="number" value="{{old('number')}}">
         @error('number')
         <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>

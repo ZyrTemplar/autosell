@@ -4,6 +4,16 @@
 
 @include('includes.header')
 
+@if($errors->any())
+    <div class="alert alert-danger col-3 mx-auto">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 @include('includes.announcement_includes.price_and_buy')
 
 @include('includes.announcement_includes.okno')
@@ -25,3 +35,5 @@
 @include('includes.footer')
 
 @endsection
+
+

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auto;
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -105,5 +107,21 @@ class UserController extends Controller
             'title'=>'Мій кабінет',
             'User'=>auth()->user()
         ]);
+    }
+
+    public function userDelete(Request $request){
+        User::destroy($request->id);
+        $autos=Auto::where('seller_id','=',$request->id)->get();
+        if (count($autos)){
+            foreach ($autos as $auto){
+                $messages=Message::where('auto_id','=',$auto->id)->get();
+                foreach ($messages as $value)
+                {
+                    $value->delete();
+                }
+                $auto->destroy($auto->id);
+            }
+        }
+        return redirect(route('admin_users'));
     }
 }

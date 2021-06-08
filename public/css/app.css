@@ -10179,6 +10179,11 @@ h3 {
   text-decoration: none;
 }
 
+.admin-nav {
+  font-size: 24px;
+  color: #95999c;
+}
+
 * {
   font-family: "Cuprum", sans-serif;
 }

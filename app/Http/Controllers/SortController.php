@@ -9,51 +9,59 @@ use Illuminate\Support\Facades\DB;
 class SortController extends Controller
 {
     public function miniSerach(Request $request){
-        DB::enableQueryLog();
-        foreach ($request->request as $key => $value){
-            dump($value);
-            if ($value==NULL){
-                $filter[$key]='*';
-            }
-            else{
-                $filter[$key]=$value;
-            }
+        $autos=Auto::all();
+        $sorter_autos=array();
+        $car_number=0;
+        $images=array();
+        if ($request['price_to']==NULL){
+            $request['price_to']=99999999999999999999;
         }
-
-        if ($filter['price_to']=='*'&&$filter['price_from']=='*'){
-            $autos=Auto::where('brand','=',$filter['brand'])
-                ->where('model','=',$filter['model'])
-                ->where('year','>=',$filter['year_from'])
-                ->where('year','<=',$filter['year_to'])
-                ->get();
+        if ($request['brand']=='all'){
+            $sorter_autos=$autos;
         }
-        elseif ($filter['price_from']=='*'){
-            $autos=Auto::where('brand','=',$filter['brand'])
-                ->where('model','=',$filter['model'])
-                ->where('year','>=',$filter['year_from'])
-                ->where('year','<=',$filter['year_to'])
-                ->where('price','<=',$filter['price_to'])
-                ->get();
-        }
-        elseif ($filter['price_to']=='*'){
-            $autos=Auto::where('brand','=',$filter['brand'])
-                ->where('model','=',$filter['model'])
-                ->where('year','>=',$filter['year_from'])
-                ->where('year','<=',$filter['year_to'])
-                ->where('price','>=',$filter['price_from'])
-                ->get();
-        }
-
         else{
-            $autos=Auto::where('brand','=',$filter['brand'])
-                ->where('model','=',$filter['model'])
-                ->where('year','>=',$filter['year_from'])
-                ->where('year','<=',$filter['year_to'])
-                ->where('price','>=',$filter['price_from'])
-                ->where('price','<=',$filter['price_to'])
-                ->get();
+            foreach ($autos as $value){
+                if ($value->brand==$request['brand']
+                    &&$value->model==$request['model']
+                    &&$value->year>=$request['year_from']
+                    &&$value->year<=$request['year_to']
+                    &&$value->price>=$request['price_from']
+                    &&$value->price<=$request['price_to'])
+                {
+                    $sorter_autos[$car_number]=$value;
+                    $car_number++;
+                }
+            }
         }
-        dd($autos);
-        return 'test';
+        $car_number=0;
+        foreach ($sorter_autos as $value){
+            $img=[
+                $value->photo1,
+                $value->photo2,
+                $value->photo3,
+                $value->photo4,
+                $value->photo5,
+                $value->photo6,
+                $value->photo7,
+                $value->photo8,
+                $value->photo9,
+                $value->photo10,
+            ];
+            for ($i=0;$i<10;$i++){
+                if ($img[$i]==NULL){
+                    unset($img[$i]);
+                }
+            }
+            $images[$car_number] = $img;
+            $car_number++;
+        }
+
+        return view('auto.allAuto')->with(
+            [
+                'title'=>$request['brand'],
+                'images'=>$images,
+                'cars_array'=>$sorter_autos
+            ]
+        );
     }
 }
