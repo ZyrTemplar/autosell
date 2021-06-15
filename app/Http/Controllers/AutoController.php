@@ -157,6 +157,13 @@ class AutoController extends Controller
 
     {
         $about_car=Auto::find($id);
+        foreach ($about_car->getAttributes() as $key=>$value){
+            if ($value==null){
+                if ($key!='photo1'&&$key!='photo2'&&$key!='photo3'&&$key!='photo4'&&$key!='photo5'&&$key!='photo6'&&$key!='photo7'&&$key!='photo8'&&$key!='photo9'&&$key!='photo10'){
+                    $about_car[$key]='Не вказано';
+                }
+            }
+        }
         $messages=Message::where('auto_id','=',$about_car->id)->get();
         $photos=[
             asset('/storage/'.$about_car['photo1']),

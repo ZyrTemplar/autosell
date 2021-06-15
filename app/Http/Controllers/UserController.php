@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -19,13 +20,21 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
+        $rules=[
             'name'=>'required',
             'email'=>'required|email|unique:users',
             'password'=>'required|confirmed|min:8',
             'number'=>'digits:12|required|unique:users',
-        ]);
 
+        ];
+        $messages=[
+            'email.unique'=>'Даний email вже зареєстрований',
+            'password.confirmed'=>'Паролі не збігаються',
+            'password.min'=>'Пароль повинен скаладати мінімум 8 символів',
+            'number.digits'=>'Номер повинен складатись лише з цифр і містити в собі 12 символів',
+            'number.unique'=>'Даний номер вже зареєстрований',
+        ];
+        Validator::make($request->all(),$rules,$messages)->validate();
         $user=User::create([
             'name'=>$request->name,
             'email'=>$request->email,

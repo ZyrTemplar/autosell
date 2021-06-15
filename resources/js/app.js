@@ -239,7 +239,7 @@ window.change_menu =function (id) {
                                     </div>
                                     <table>
                                         <tr>
-                                            <td> <img class="mr-1" src="/img/valuta/grn.png" alt=""></td>
+                                            <td> <img class="mr-1" src="/img/valuta/dollar.png" alt=""></td>
                                             <td class="price mt-1">${price}</td>
                                         </tr>
                                     </table>

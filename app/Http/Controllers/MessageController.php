@@ -19,7 +19,8 @@ class MessageController extends Controller
             'name.max'=>"Поле ім'я повинно містити не більше 255 символів",
             'number.digits'=>'Номер повинен складатись з 10 чисел',
             'email.max'=>'Поле email повинно містити не більше 255 символів',
-            'name.price'=>'Поле ціна повинно бути не більше 9999999999',
+            'price.max'=>'Поле ціна повинно бути не більше 9999999999',
+            'price.numeric'=>'Поле ціна повинно бути числовим',
         ];
         Validator::make($request->all(),$rules,$messages)->validate();
         Message::create([
