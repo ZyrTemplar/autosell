@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class MessageController extends Controller
 {
     public function store(Request $request){
+        if (empty($request->all())) return abort('404');
         $rules=[
           'name'=>'required|max:255',
           'number'=>'required|digits:10',

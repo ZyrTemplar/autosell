@@ -6,7 +6,7 @@
     <a class="btn btn-danger btn-lg mr-3" href="/auto/create" >Продати авто</a>
     @endauth
     @guest()
-        <a class="btn btn-success btn-lg mr-3" href="/userlogin" >Авторизація</a>
+        <a class="btn btn-success btn-lg mr-3" href="{{route('userLogin')}}" >Авторизація</a>
     @endguest
     @auth()
         <a class="btn btn-success btn-lg mr-3" href="/cabinet" >Мій кабінет</a>

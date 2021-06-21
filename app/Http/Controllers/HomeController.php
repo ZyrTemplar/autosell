@@ -10,10 +10,10 @@ class HomeController extends Controller
     public function index(){
             $title='AutoSell';
             $autos_count=count(Auto::all());
-            $id1=12;
-            $id2=13;
-            $id3=9;
-            $id4=11;
+            $id1=1;
+            $id2=2;
+            $id3=3;
+            $id4=4;
             $images=array();
             $cars_array=array(
                 'car1'=> Auto::find($id1),

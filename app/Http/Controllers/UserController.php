@@ -32,7 +32,10 @@ class UserController extends Controller
             'password.confirmed'=>'Паролі не збігаються',
             'password.min'=>'Пароль повинен скаладати мінімум 8 символів',
             'number.digits'=>'Номер повинен складатись лише з цифр і містити в собі 12 символів',
-            'number.unique'=>'Даний номер вже зареєстрований',
+            'number.required'=>'Дане поле потрібно заповнити',
+            'number.unique'=>'Даний номер зайнятий',
+            'email.required'=>'Дане поле потрібно заповнити',
+            'password.required'=>'Дане поле потрібно заповнити',
         ];
         Validator::make($request->all(),$rules,$messages)->validate();
         $user=User::create([
@@ -49,6 +52,21 @@ class UserController extends Controller
 
     public function change(Request $request){
         $user=User::find(auth()->user('id'));
+        $rules=[
+            'name'=>'required',
+            'email'=>'required|email|unique:users',
+            'number'=>'digits:12|required|unique:users',
+
+        ];
+        $messages=[
+            'email.unique'=>'Даний email вже зареєстрований',
+            'number.digits'=>'Номер повинен складатись лише з цифр і містити в собі 12 символів',
+            'number.unique'=>'Даний номер вже зареєстрований',
+            'number.required'=>'Поле номер потрібно заповнити',
+            'email.required'=>'Поле email потрібно заповнити',
+            'name.required'=>"Поле ім'я потрібно заповнити"
+        ];
+        Validator::make($request->all(),$rules,$messages)->validate();
 
         if ($user[0]->number==$request->number&&$user[0]->email==$request->email){
             $user[0]->name=$request->name;
@@ -89,10 +107,17 @@ class UserController extends Controller
 
     public function login(Request $request){
 
-        $request->validate([
+        $rules=[
             'email'=>'required|email',
             'password'=>'required|min:8',
-        ]);
+        ];
+        $messages=[
+            'password.min'=>'Пароль повинен скаладати мінімум 8 символів',
+            'email.email'=>'Дане поле повинно бути валдіним email-ом',
+            'email.required'=>'Дане поле потрібно заповнити',
+            'password.required'=>'Дане поле потрібно заповнити',
+        ];
+        Validator::make($request->all(),$rules,$messages)->validate();
 
         if (Auth::attempt([
             'email'=>$request->email,
@@ -102,7 +127,7 @@ class UserController extends Controller
             return redirect('/cabinet');
         }
         else{
-            return redirect('/userlogin')->with('error', 'Неправильний логін або пароль');
+            return redirect('/login')->with('error', 'Неправильний логін або пароль');
         }
         }
 

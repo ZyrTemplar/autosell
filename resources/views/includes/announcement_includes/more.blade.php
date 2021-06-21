@@ -11,6 +11,7 @@
                 <div class="col text-left">
                     <h3>Марка: {{$about_car['brand']}} </h3>
                     <h3>Модель: {{$about_car['model']}} </h3>
+                    <h3>Модифікація: {{$about_car['modification']}} </h3>
                     <h3>Об'єм двигуна: {{$about_car['objem']}} л. </h3>
                     <h3>Потужність: {{$about_car['capacity']}} л/c. </h3>
                     <h3>Тип палива: {{$about_car['fuel']}} </h3>
